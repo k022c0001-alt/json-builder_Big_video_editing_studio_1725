@@ -1,6 +1,6 @@
-import { app, BrowserWindow, ipcMain, dialog, clipboard } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
-import * as fs from 'fs'
+import { registerIpcHandlers } from './ipc-handlers'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -26,6 +26,7 @@ function createWindow(): void {
 }
 
 app.whenReady().then(() => {
+  registerIpcHandlers()
   createWindow()
 
   app.on('activate', () => {
@@ -35,27 +36,4 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
-})
-
-ipcMain.handle('save-json-file', async (_event, json: string, filename: string) => {
-  const { canceled, filePath } = await dialog.showSaveDialog({
-    defaultPath: filename || 'output.json',
-    filters: [{ name: 'JSON Files', extensions: ['json'] }],
-  })
-  if (canceled || !filePath) return false
-  try {
-    fs.writeFileSync(filePath, json, 'utf-8')
-    return true
-  } catch {
-    return false
-  }
-})
-
-ipcMain.handle('copy-to-clipboard', async (_event, text: string) => {
-  try {
-    clipboard.writeText(text)
-    return true
-  } catch {
-    return false
-  }
 })

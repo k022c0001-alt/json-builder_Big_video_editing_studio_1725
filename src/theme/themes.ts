@@ -1,0 +1,143 @@
+export type ThemeName = 'light' | 'dark' | 'rainbow' | 'space' | 'classroom'
+
+export interface ThemeDefinition {
+  name: ThemeName
+  label: string
+  icon: string
+  vars: Record<string, string>
+}
+
+export const THEMES: Record<ThemeName, ThemeDefinition> = {
+  light: {
+    name: 'light',
+    label: 'Light',
+    icon: '☀️',
+    vars: {
+      '--bg-primary': '#ffffff',
+      '--bg-secondary': '#f5f5f5',
+      '--bg-tertiary': '#e8e8e8',
+      '--text-primary': '#1a1a1a',
+      '--text-secondary': '#666666',
+      '--text-muted': '#999999',
+      '--accent': '#4a90e2',
+      '--accent-hover': '#357abd',
+      '--error': '#d32f2f',
+      '--warning': '#f57c00',
+      '--success': '#388e3c',
+      '--border': '#dddddd',
+      '--resizer': '#cccccc',
+      '--resizer-active': '#4a90e2',
+      '--scrollbar-thumb': '#cccccc',
+      '--font-family': "'Segoe UI', system-ui, sans-serif",
+      '--font-mono': "'Consolas', 'Courier New', monospace",
+    },
+  },
+  dark: {
+    name: 'dark',
+    label: 'Dark',
+    icon: '🌙',
+    vars: {
+      '--bg-primary': '#1e1e1e',
+      '--bg-secondary': '#2d2d2d',
+      '--bg-tertiary': '#252526',
+      '--text-primary': '#ffffff',
+      '--text-secondary': '#cccccc',
+      '--text-muted': '#858585',
+      '--accent': '#569cd6',
+      '--accent-hover': '#4080b0',
+      '--error': '#f48771',
+      '--warning': '#cca700',
+      '--success': '#4ec9b0',
+      '--border': '#3e3e3e',
+      '--resizer': '#3e3e3e',
+      '--resizer-active': '#007acc',
+      '--scrollbar-thumb': '#555555',
+      '--font-family': "'Segoe UI', system-ui, sans-serif",
+      '--font-mono': "'Consolas', 'Courier New', monospace",
+    },
+  },
+  rainbow: {
+    name: 'rainbow',
+    label: 'Rainbow',
+    icon: '🌈',
+    vars: {
+      '--bg-primary': '#fff8ff',
+      '--bg-secondary': '#f0e8ff',
+      '--bg-tertiary': '#e8d8ff',
+      '--text-primary': '#1a0030',
+      '--text-secondary': '#5a2080',
+      '--text-muted': '#9060a0',
+      '--accent': '#e040fb',
+      '--accent-hover': '#c000d0',
+      '--error': '#f44336',
+      '--warning': '#ff9800',
+      '--success': '#00c853',
+      '--border': '#d0a0e0',
+      '--resizer': '#d0a0e0',
+      '--resizer-active': '#e040fb',
+      '--scrollbar-thumb': '#d0a0e0',
+      '--font-family': "'Segoe UI', system-ui, sans-serif",
+      '--font-mono': "'Consolas', 'Courier New', monospace",
+      '--rainbow-gradient': 'linear-gradient(135deg, #ff6b6b, #ffcc00, #4ecdc4, #45b7d1, #a855f7, #ec4899)',
+    },
+  },
+  space: {
+    name: 'space',
+    label: 'Space',
+    icon: '🌌',
+    vars: {
+      '--bg-primary': '#0a0e27',
+      '--bg-secondary': '#1a1f3a',
+      '--bg-tertiary': '#141828',
+      '--text-primary': '#e0e6ff',
+      '--text-secondary': '#a0a8d8',
+      '--text-muted': '#606898',
+      '--accent': '#00d4ff',
+      '--accent-hover': '#00b0d8',
+      '--error': '#ff6b9d',
+      '--warning': '#ff00ff',
+      '--success': '#00ff9f',
+      '--border': '#2a3060',
+      '--resizer': '#2a3060',
+      '--resizer-active': '#00d4ff',
+      '--scrollbar-thumb': '#2a3060',
+      '--font-family': "'Segoe UI', system-ui, sans-serif",
+      '--font-mono': "'Consolas', 'Courier New', monospace",
+    },
+  },
+  classroom: {
+    name: 'classroom',
+    label: 'Classroom',
+    icon: '📚',
+    vars: {
+      '--bg-primary': '#2c3e2d',
+      '--bg-secondary': '#1f2e20',
+      '--bg-tertiary': '#253326',
+      '--text-primary': '#f0ede0',
+      '--text-secondary': '#d4d0bc',
+      '--text-muted': '#9a9680',
+      '--accent': '#ffd700',
+      '--accent-hover': '#e6c200',
+      '--error': '#ff6b6b',
+      '--warning': '#ff9800',
+      '--success': '#a8e6a3',
+      '--border': '#3d5240',
+      '--resizer': '#3d5240',
+      '--resizer-active': '#ffd700',
+      '--scrollbar-thumb': '#3d5240',
+      '--font-family': "Georgia, 'Times New Roman', serif",
+      '--font-mono': "'Courier New', monospace",
+    },
+  },
+}
+
+export const DEFAULT_THEME: ThemeName = 'dark'
+
+export function applyTheme(theme: ThemeName): void {
+  const definition = THEMES[theme]
+  const root = document.documentElement
+  Object.entries(definition.vars).forEach(([key, value]) => {
+    root.style.setProperty(key, value)
+  })
+  root.setAttribute('data-theme', theme)
+}

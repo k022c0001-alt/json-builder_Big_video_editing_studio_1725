@@ -1,0 +1,19 @@
+/* CSS Custom Properties used app-wide */
+:root {
+  --editor-split-ratio: 50%;
+  --header-height: 40px;
+  --error-panel-max-height: 160px;
+  --tab-bar-height: 36px;
+  --toast-z: 9999;
+  --sidebar-z: 100;
+  --modal-z: 1000;
+  --font-size-base: 13px;
+  --line-height-base: 1.6;
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+}

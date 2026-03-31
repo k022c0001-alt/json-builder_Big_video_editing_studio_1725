@@ -1,0 +1,60 @@
+/* Global styles that apply theme CSS variables to base elements */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg-primary, #1e1e1e);
+  color: var(--text-primary, #ffffff);
+  font-family: var(--font-family, 'Segoe UI', system-ui, sans-serif);
+  font-size: var(--font-size-base, 13px);
+  line-height: var(--line-height-base, 1.6);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary, #2d2d2d);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb, #555);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted, #888);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent, #569cd6);
+  outline-offset: 2px;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+a {
+  color: var(--accent, #569cd6);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
