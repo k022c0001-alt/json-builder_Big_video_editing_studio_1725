@@ -7,11 +7,15 @@ import { FileMenu } from '../FileMenu'
 import { ThemeSelector } from '../ThemeSelector'
 import { ProjectTabs } from '../ProjectTabs'
 import { SettingsPanel } from '../SettingsPanel'
+import { TemplatePanel } from '../TemplatePanel'
+import { DataAddPanel } from '../DataAddPanel'
+import { QuickAddButton } from '../QuickAddButton'
 import { useTabContext } from '../TabContextProvider'
 import { useTheme } from '../../hooks/useTheme'
 import { EDITOR_CONFIG } from '../../constants/editor'
 import { useProjectStore } from 'shared/store/project.store'
 import styles from '../../styles/editor.module.css'
+import toolbarStyles from '../../styles/toolbar.module.css'
 
 export function EditorLayout() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -91,6 +95,14 @@ export function EditorLayout() {
         </div>
       </div>
 
+      {/* Second toolbar: Templates + Add Data */}
+      <div className={toolbarStyles.toolbarRow} role="region" aria-label="Editor tools">
+        <TemplatePanel />
+        <div className={toolbarStyles.toolbarSeparator} />
+        <span className={toolbarStyles.toolbarRowLabel}>➕ Add Data</span>
+        <DataAddPanel inline />
+      </div>
+
       {/* Main split view */}
       <div className={styles.splitContainer}>
         {/* Left panel */}
@@ -127,6 +139,9 @@ export function EditorLayout() {
 
       {/* Settings modal */}
       {settingsOpen && <SettingsPanel onClose={() => setSettingsOpen(false)} />}
+
+      {/* Floating quick-add button */}
+      <QuickAddButton />
     </div>
   )
 }

@@ -1,0 +1,31 @@
+/* =========================================================
+   Toolbar row (second toolbar under the main toolbar)
+   ========================================================= */
+
+.toolbarRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--bg-secondary, #2d2d2d);
+  border-bottom: 1px solid var(--border, #3e3e3e);
+  flex-shrink: 0;
+}
+
+.toolbarRowLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted, #888);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 2px;
+  white-space: nowrap;
+}
+
+.toolbarSeparator {
+  width: 1px;
+  height: 20px;
+  background: var(--border, #3e3e3e);
+  margin: 0 4px;
+  flex-shrink: 0;
+}

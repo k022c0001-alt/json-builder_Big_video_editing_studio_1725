@@ -10,9 +10,13 @@ export function useRealtimeParse() {
 
   const [localText, setLocalText] = useState(memoText)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  // Track the last text value we pushed into the store so we can detect
+  // external changes (e.g. from appendText / replaceText).
+  const lastSentRef = useRef(memoText)
 
   const handleTextChange = useCallback(
     (text: string) => {
+      lastSentRef.current = text
       setLocalText(text)
       setMemoText(text)
 
@@ -26,6 +30,17 @@ export function useRealtimeParse() {
     },
     [setMemoText, loadProject],
   )
+
+  // Sync localText when memoText is changed externally (e.g. template insert,
+  // appendText from data-addition buttons).
+  useEffect(() => {
+    if (memoText !== lastSentRef.current) {
+      lastSentRef.current = memoText
+      setLocalText(memoText)
+      const result = parseMemoToProject(memoText)
+      loadProject(result.project, result.errors)
+    }
+  }, [memoText, loadProject])
 
   // Run initial parse on mount
   useEffect(() => {

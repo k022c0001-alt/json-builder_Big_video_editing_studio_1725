@@ -1,0 +1,88 @@
+/* =========================================================
+   Shared button styles for DataAddPanel & QuickAddButton
+   ========================================================= */
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid var(--border, #3e3e3e);
+  border-radius: 4px;
+  background: var(--bg-primary, #1e1e1e);
+  color: var(--text-secondary, #ccc);
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.addBtn:hover {
+  background: var(--accent, #569cd6);
+  border-color: var(--accent, #569cd6);
+  color: #fff;
+}
+
+.addBtn:focus-visible {
+  outline: 2px solid var(--accent, #569cd6);
+  outline-offset: 2px;
+}
+
+/* Floating action button (QuickAddButton) */
+.floatingBtn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 500;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent, #569cd6);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.floatingBtn:hover {
+  background: #3b82c4;
+  transform: scale(1.08);
+}
+
+.floatingMenu {
+  position: fixed;
+  bottom: 86px;
+  right: 28px;
+  z-index: 500;
+  background: var(--bg-secondary, #2d2d2d);
+  border: 1px solid var(--border, #3e3e3e);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  padding: 6px 0;
+  min-width: 180px;
+}
+
+.floatingMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 14px;
+  background: none;
+  border: none;
+  color: var(--text-primary, #d4d4d4);
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.floatingMenuItem:hover {
+  background: var(--accent, #569cd6);
+  color: #fff;
+}
