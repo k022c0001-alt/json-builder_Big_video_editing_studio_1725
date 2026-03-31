@@ -1,0 +1,281 @@
+/* =========================================================
+   Add Data Panel – dropdown, modals, template selector
+   ========================================================= */
+
+/* ── Dropdown wrapper ── */
+.addDropdownWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.addDropdownMenu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 200;
+  background: var(--bg-secondary, #2d2d2d);
+  border: 1px solid var(--border, #3e3e3e);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  min-width: 180px;
+  padding: 4px 0;
+  animation: fadeIn 0.12s ease;
+}
+
+.addDropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 14px;
+  background: none;
+  border: none;
+  color: var(--text-primary, #ccc);
+  cursor: pointer;
+  font-size: 12px;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.addDropdownItem:hover {
+  background: var(--accent, #569cd6);
+  color: #fff;
+}
+
+/* ── Modal overlay ── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.15s ease;
+}
+
+.modal {
+  background: var(--bg-secondary, #2d2d2d);
+  border: 1px solid var(--border, #3e3e3e);
+  border-radius: 8px;
+  width: 360px;
+  max-width: 95vw;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border, #3e3e3e);
+}
+
+.modalTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #fff);
+  margin: 0;
+}
+
+.modalCloseBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted, #999);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.modalCloseBtn:hover {
+  color: var(--text-primary, #fff);
+}
+
+.modalBody {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border, #3e3e3e);
+}
+
+/* ── Form fields ── */
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.formLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary, #ccc);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.formInput,
+.formSelect {
+  background: var(--bg-primary, #1e1e1e);
+  border: 1px solid var(--border, #3e3e3e);
+  border-radius: 4px;
+  color: var(--text-primary, #d4d4d4);
+  font-size: 13px;
+  padding: 6px 10px;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+
+.formInput:focus,
+.formSelect:focus {
+  border-color: var(--accent, #569cd6);
+}
+
+.formSelect {
+  cursor: pointer;
+}
+
+/* ── Buttons ── */
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 4px;
+  background: var(--accent, #569cd6);
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.btnPrimary:hover {
+  background: var(--accent-hover, #4a86c0);
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 16px;
+  border: 1px solid var(--border, #3e3e3e);
+  border-radius: 4px;
+  background: var(--bg-primary, #1e1e1e);
+  color: var(--text-secondary, #ccc);
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.15s;
+}
+
+.btnSecondary:hover {
+  background: var(--bg-tertiary, #333);
+  color: var(--text-primary, #fff);
+}
+
+/* ── Template list ── */
+.templateList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.templateItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border, #3e3e3e);
+  border-radius: 6px;
+  background: var(--bg-primary, #1e1e1e);
+  color: var(--text-primary, #d4d4d4);
+  cursor: pointer;
+  font-size: 13px;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.templateItem:hover {
+  background: var(--bg-tertiary, #333);
+  border-color: var(--accent, #569cd6);
+}
+
+.templateItemSelected {
+  background: var(--bg-tertiary, #333);
+  border-color: var(--accent, #569cd6);
+  color: #fff;
+}
+
+/* ── Template Selector (initial / inline) ── */
+.templateSelector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.templateSelectorTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary, #ccc);
+  margin: 0;
+}
+
+.templateGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.templateCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--border, #3e3e3e);
+  border-radius: 6px;
+  background: var(--bg-secondary, #2d2d2d);
+  color: var(--text-primary, #d4d4d4);
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.templateCard:hover {
+  background: var(--bg-tertiary, #333);
+  border-color: var(--accent, #569cd6);
+}
+
+.templateCardIcon {
+  font-size: 18px;
+}
+
+.templateCardLabel {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
