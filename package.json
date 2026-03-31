@@ -1,0 +1,52 @@
+{
+  "name": "json-builder_big_video_editing_studio_1725",
+  "version": "0.1.0",
+  "description": "Big video editing studio – JSON builder from memos",
+  "private": true,
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "concurrently -n vite,electron -c cyan,yellow \"npm run dev:vite\" \"npm run dev:electron\"",
+    "dev:vite": "vite",
+    "dev:electron": "wait-on http://localhost:5173 && electron .",
+    "build": "tsc --noEmit && vite build && tsc -p tsconfig.electron.json",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^8.2.2",
+    "electron": "^31.1.0",
+    "electron-builder": "^24.13.3",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1",
+    "wait-on": "^7.2.0"
+  },
+  "dependencies": {
+    "immer": "^10.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^4.5.2"
+  },
+  "build": {
+    "appId": "com.k022c0001.jsonbuilder",
+    "productName": "JSON Builder - Big Video Editing Studio",
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "directories": {
+      "buildResources": "assets",
+      "output": "release"
+    }
+  }
+}
