@@ -3,6 +3,12 @@ import { MemoInput } from '../MemoInput'
 import { ErrorPanel } from '../ErrorPanel'
 import { ExportHeader } from '../ExportHeader'
 import { JsonPreview } from '../JsonPreview'
+import { FileMenu } from '../FileMenu'
+import { ThemeSelector } from '../ThemeSelector'
+import { ProjectTabs } from '../ProjectTabs'
+import { SettingsPanel } from '../SettingsPanel'
+import { useTabContext } from '../TabContextProvider'
+import { useTheme } from '../../hooks/useTheme'
 import { EDITOR_CONFIG } from '../../constants/editor'
 import { useProjectStore } from 'shared/store/project.store'
 import styles from '../../styles/editor.module.css'
@@ -12,7 +18,10 @@ export function EditorLayout() {
   const [leftPercent, setLeftPercent] = useState(EDITOR_CONFIG.SPLIT_RATIO[0])
   const [isResizing, setIsResizing] = useState(false)
   const [errorPanelVisible, setErrorPanelVisible] = useState(true)
+  const [settingsOpen, setSettingsOpen] = useState(false)
 
+  const { theme, toggleTheme } = useTheme()
+  const { tabs, activeTabId, activeTab, addTab, closeTab, switchTab, moveTab } = useTabContext()
   const errors = useProjectStore((s) => s.parserErrors)
 
   // Re-show error panel whenever new errors appear
@@ -58,36 +67,66 @@ export function EditorLayout() {
       className={styles.editorRoot}
       style={{ cursor: isResizing ? 'col-resize' : undefined }}
     >
-      {/* Left panel */}
-      <div
-        className={styles.leftPanel}
-        style={{ width: `${leftPercent}%` }}
-      >
-        <MemoInput showLineNumbers />
-        {errorPanelVisible && (
-          <ErrorPanel onClose={() => setErrorPanelVisible(false)} />
-        )}
-      </div>
-
-      {/* Resizer */}
-      <div
-        className={`${styles.resizer} ${isResizing ? styles.resizerActive : ''}`}
-        onMouseDown={handleResizerMouseDown}
-        role="separator"
-        aria-orientation="vertical"
-        aria-label="Resize panels"
-      />
-
-      {/* Right panel */}
-      <div
-        className={styles.rightPanel}
-        style={{ width: `${100 - leftPercent}%` }}
-      >
-        <div className={styles.previewPanel}>
-          <ExportHeader />
-          <JsonPreview />
+      {/* Top toolbar */}
+      <div className={styles.toolbar}>
+        <FileMenu />
+        <ProjectTabs
+          tabs={tabs}
+          activeTabId={activeTabId}
+          onSwitchTab={switchTab}
+          onCloseTab={closeTab}
+          onAddTab={() => addTab()}
+          onMoveTab={moveTab}
+        />
+        <div className={styles.toolbarRight}>
+          <ThemeSelector theme={theme} onThemeChange={toggleTheme} />
+          <button
+            className={styles.exportBtn}
+            onClick={() => setSettingsOpen(true)}
+            title="Settings"
+            aria-label="Open settings"
+          >
+            ⚙️
+          </button>
         </div>
       </div>
+
+      {/* Main split view */}
+      <div className={styles.splitContainer}>
+        {/* Left panel */}
+        <div
+          className={styles.leftPanel}
+          style={{ width: `${leftPercent}%` }}
+        >
+          <MemoInput showLineNumbers />
+          {errorPanelVisible && (
+            <ErrorPanel onClose={() => setErrorPanelVisible(false)} />
+          )}
+        </div>
+
+        {/* Resizer */}
+        <div
+          className={`${styles.resizer} ${isResizing ? styles.resizerActive : ''}`}
+          onMouseDown={handleResizerMouseDown}
+          role="separator"
+          aria-orientation="vertical"
+          aria-label="Resize panels"
+        />
+
+        {/* Right panel */}
+        <div
+          className={styles.rightPanel}
+          style={{ width: `${100 - leftPercent}%` }}
+        >
+          <div className={styles.previewPanel}>
+            <ExportHeader />
+            <JsonPreview />
+          </div>
+        </div>
+      </div>
+
+      {/* Settings modal */}
+      {settingsOpen && <SettingsPanel onClose={() => setSettingsOpen(false)} />}
     </div>
   )
 }

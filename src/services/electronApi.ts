@@ -1,6 +1,10 @@
 export interface ElectronAPI {
   saveJsonFile(json: string, filename: string): Promise<boolean>
+  saveJsonFileAs?(json: string, defaultPath?: string): Promise<string | null>
+  openJsonFile?(): Promise<{ content: string; filePath: string } | null>
   copyToClipboard(text: string): Promise<boolean>
+  getRecentFiles?(): Promise<string[]>
+  addRecentFile?(filePath: string): Promise<void>
 }
 
 declare global {

@@ -1,6 +1,11 @@
 import React from 'react'
 import { EditorLayout } from './components/Editor/EditorLayout'
+import { TabContextProvider } from './components/TabContextProvider'
 
 export default function App() {
-  return <EditorLayout />
+  return (
+    <TabContextProvider>
+      <EditorLayout />
+    </TabContextProvider>
+  )
 }
