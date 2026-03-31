@@ -1,0 +1,6 @@
+export const EDITOR_CONFIG = {
+  PARSE_DEBOUNCE_MS: 300,
+  SPLIT_RATIO: [50, 50] as [number, number],
+  ERROR_PANEL_MAX_HEIGHT: 200,
+  TOAST_DURATION_MS: 3000,
+}
