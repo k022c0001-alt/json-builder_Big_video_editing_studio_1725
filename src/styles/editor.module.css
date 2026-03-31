@@ -1,0 +1,314 @@
+/* =========================================================
+   Editor Layout
+   ========================================================= */
+
+.editorRoot {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #1e1e1e;
+  color: #d4d4d4;
+}
+
+/* Left panel */
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Right panel */
+.rightPanel {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  overflow: hidden;
+}
+
+/* =========================================================
+   Resizer
+   ========================================================= */
+
+.resizer {
+  width: 5px;
+  cursor: col-resize;
+  background: #3e3e3e;
+  flex-shrink: 0;
+  transition: background 0.15s;
+  user-select: none;
+}
+
+.resizer:hover,
+.resizerActive {
+  background: #007acc;
+}
+
+/* =========================================================
+   Memo Input
+   ========================================================= */
+
+.memoWrapper {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.lineNumbers {
+  padding: 12px 8px;
+  background: #252526;
+  color: #858585;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: right;
+  user-select: none;
+  overflow: hidden;
+  min-width: 40px;
+  white-space: pre;
+}
+
+.memoTextarea {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 12px;
+  caret-color: #ffffff;
+  overflow-y: auto;
+}
+
+.memoTextarea::placeholder {
+  color: #555;
+}
+
+/* =========================================================
+   Error Panel
+   ========================================================= */
+
+.errorPanel {
+  background: #1a1a1a;
+  border-top: 1px solid #3e3e3e;
+  overflow-y: auto;
+  animation: slideIn 0.2s ease;
+  flex-shrink: 0;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.errorHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: #252526;
+  border-bottom: 1px solid #3e3e3e;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ccc;
+}
+
+.errorCloseBtn {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.errorCloseBtn:hover {
+  color: #fff;
+}
+
+.errorList {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+}
+
+.errorItem {
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.errorItemError {
+  color: #f48771;
+}
+
+.errorItemWarning {
+  color: #cca700;
+}
+
+.errorSuggestion {
+  font-size: 11px;
+  color: #888;
+  margin-left: 4px;
+}
+
+/* =========================================================
+   JSON Preview
+   ========================================================= */
+
+.previewPanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.exportHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #252526;
+  border-bottom: 1px solid #3e3e3e;
+  flex-shrink: 0;
+}
+
+.exportBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  border: 1px solid #3e3e3e;
+  border-radius: 4px;
+  background: #2d2d2d;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.exportBtn:hover {
+  background: #3e3e3e;
+  border-color: #555;
+  color: #fff;
+}
+
+.exportBtnLabel {
+  font-size: 11px;
+}
+
+.jsonScrollArea {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  background: #1e1e1e;
+}
+
+/* =========================================================
+   JSON Tree View
+   ========================================================= */
+
+.jsonTree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.jsonTreeNested {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+
+.jsonNode {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.jsonKey {
+  color: #9cdcfe;
+}
+
+.jsonColon {
+  color: #d4d4d4;
+}
+
+.jsonBracket {
+  color: #888;
+}
+
+.jsonValueString {
+  color: #ce9178;
+}
+
+.jsonValueNumber {
+  color: #b5cea8;
+}
+
+.jsonValueBoolean {
+  color: #569cd6;
+}
+
+.jsonValueNull {
+  color: #569cd6;
+}
+
+/* =========================================================
+   Toast Notification
+   ========================================================= */
+
+.toastContainer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  background: #333;
+  color: #fff;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  animation: toastIn 0.2s ease;
+  pointer-events: auto;
+}
+
+.toastSuccess {
+  border-left: 4px solid #4ec9b0;
+}
+
+.toastError {
+  border-left: 4px solid #f48771;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
