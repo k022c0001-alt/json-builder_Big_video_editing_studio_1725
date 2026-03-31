@@ -7,6 +7,7 @@ import { FileMenu } from '../FileMenu'
 import { ThemeSelector } from '../ThemeSelector'
 import { ProjectTabs } from '../ProjectTabs'
 import { SettingsPanel } from '../SettingsPanel'
+import { TemplateSelector } from '../TemplateSelector'
 import { useTabContext } from '../TabContextProvider'
 import { useTheme } from '../../hooks/useTheme'
 import { EDITOR_CONFIG } from '../../constants/editor'
@@ -23,6 +24,7 @@ export function EditorLayout() {
   const { theme, toggleTheme } = useTheme()
   const { tabs, activeTabId, activeTab, addTab, closeTab, switchTab, moveTab } = useTabContext()
   const errors = useProjectStore((s) => s.parserErrors)
+  const memoText = useProjectStore((s) => s.memoText)
 
   // Re-show error panel whenever new errors appear
   useEffect(() => {
@@ -99,6 +101,7 @@ export function EditorLayout() {
           style={{ width: `${leftPercent}%` }}
         >
           <MemoInput showLineNumbers />
+          {!memoText && <TemplateSelector />}
           {errorPanelVisible && (
             <ErrorPanel onClose={() => setErrorPanelVisible(false)} />
           )}

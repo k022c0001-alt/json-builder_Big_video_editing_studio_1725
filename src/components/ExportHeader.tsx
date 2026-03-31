@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react'
 import { useProjectStore } from 'shared/store/project.store'
 import { electronApi } from '../services/electronApi'
 import { EDITOR_CONFIG } from '../constants/editor'
+import { AddDataPanel } from './AddDataPanel'
 import styles from '../styles/editor.module.css'
 
 interface Toast {
@@ -60,6 +61,7 @@ export function ExportHeader() {
         <button className={styles.exportBtn} onClick={handleCopy} title="Copy JSON to clipboard">
           📋 <span className={styles.exportBtnLabel}>Copy to Clipboard</span>
         </button>
+        <AddDataPanel />
       </div>
 
       {toasts.length > 0 && (
