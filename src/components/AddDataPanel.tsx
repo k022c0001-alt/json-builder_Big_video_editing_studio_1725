@@ -4,15 +4,16 @@ import { AddKeyValueModal } from './modals/AddKeyValueModal'
 import { AddSectionModal } from './modals/AddSectionModal'
 import { AddArrayItemModal } from './modals/AddArrayItemModal'
 import { TemplatePickerModal } from './modals/TemplatePickerModal'
+import { ShortcutsModal } from './modals/ShortcutsModal'
 import addStyles from '../styles/adddata.module.css'
 import editorStyles from '../styles/editor.module.css'
 
-type ModalType = 'keyvalue' | 'section' | 'array' | 'template' | null
+type ModalType = 'keyvalue' | 'section' | 'array' | 'template' | 'shortcuts' | null
 
 export function AddDataPanel() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [modal, setModal] = useState<ModalType>(null)
-  const { addKeyValue, addSection, addArrayItem, insertTemplate } = useAddData()
+  const { addKeyValue, addSection, addArrayItem, insertTemplate, insertShortcuts } = useAddData()
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   // Close dropdown when clicking outside
@@ -58,6 +59,9 @@ export function AddDataPanel() {
             <button className={addStyles.addDropdownItem} role="menuitem" onClick={() => openModal('template')}>
               ➕ From Template
             </button>
+            <button className={addStyles.addDropdownItem} role="menuitem" onClick={() => openModal('shortcuts')}>
+              ⌨️ Shortcuts
+            </button>
           </div>
         )}
       </div>
@@ -83,6 +87,12 @@ export function AddDataPanel() {
       {modal === 'template' && (
         <TemplatePickerModal
           onInsert={insertTemplate}
+          onClose={() => setModal(null)}
+        />
+      )}
+      {modal === 'shortcuts' && (
+        <ShortcutsModal
+          onInsert={insertShortcuts}
           onClose={() => setModal(null)}
         />
       )}
