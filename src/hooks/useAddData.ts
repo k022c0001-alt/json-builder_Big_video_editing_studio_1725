@@ -42,5 +42,9 @@ export const useAddData = () => {
     }
   }
 
-  return { addKeyValue, addSection, addArrayItem, insertTemplate }
+  const insertShortcuts = (markdown: string) => {
+    setMemoText(memoText ? memoText + '\n\n' + markdown : markdown)
+  }
+
+  return { addKeyValue, addSection, addArrayItem, insertTemplate, insertShortcuts }
 }
